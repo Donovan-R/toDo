@@ -100,10 +100,10 @@ const Tasks = () => {
           ) : (
             ''
           )}
-          <span>
-            <Link to='/'>changer de compte</Link>
-          </span>
         </div>
+        <span>
+          <Link to='/'>changer de compte</Link>
+        </span>
       </section>
     </>
   );

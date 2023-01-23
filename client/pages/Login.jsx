@@ -10,25 +10,25 @@ const Login = () => {
     <>
       <section className='loginForm'>
         <h2>veuillez vous identifier</h2>
-        <form action=''>
-          <div>
-            <label htmlFor='name'>identifiant</label>
-            <input type='text' name='name' />
+        <form action='' className='formContainer'>
+          <div className='formRow'>
+            <label htmlFor='email'>email</label>
+            <input type='email' name='email' />
           </div>
-          <div>
+          <div className='formRow'>
             <label htmlFor='mdp'>mot de passe</label>
             <input type='text' name='mdp' id='' />
           </div>
-          <div>
+          <div className='formRow'>
             <button className='connectBtn' onClick={(e) => connectClick(e)}>
               <Link to='/toDo'> Se connecter </Link>
             </button>
           </div>
         </form>
+        <span>
+          pas de compte ?<Link to='/register'> c'est par ici</Link>
+        </span>
       </section>
-      <span>
-        pas de compte ?<Link to='/register'> c'est par ici</Link>
-      </span>
     </>
   );
 };

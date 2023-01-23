@@ -10,29 +10,26 @@ const Register = () => {
     <>
       <section className='registerForm'>
         <h2>Veuillez renseigner les champs ci-dessous</h2>
-        <form action='' onSubmit={handleSubmit}>
-          <div>
+        <form action='' onSubmit={handleSubmit} className='formContainer'>
+          <div className='formRow'>
             <label htmlFor='lastname'>Nom</label>
             <input type='text' className='formInput' />
           </div>
-          <div>
+          <div className='formRow'>
             <label htmlFor='firstname'>Prénom</label>
             <input type='text' className='formInput' />
           </div>
-          <div>
-            <label htmlFor='tel'>Tééléphone</label>
+          <div className='formRow'>
+            <label htmlFor='tel'>Téléphone</label>
             <input type='tel' className='formInput' />
           </div>
-          <div>
-            <label htmlFor='adress'>Adresse</label>
-            <input type='text' className='formInput' />
+          <div className='formRow'>
+            <label htmlFor='email'>Email</label>
+            <input type='email' className='formInput' />
           </div>
-          <div>
-            <label htmlFor='name'>identifiant</label>
-            <input type='text' name='name' />
-          </div>
-          <div>
-            <label htmlFor='password'>mot de passe</label>
+
+          <div className='formRow'>
+            <label htmlFor='password'>Mot de passe</label>
             <input type='password' name='password' />
           </div>
           <div>
@@ -41,11 +38,11 @@ const Register = () => {
             </button>
           </div>
         </form>
+        <span>
+          {' '}
+          <Link to='/'> page de connexion</Link>
+        </span>
       </section>
-      <span>
-        {' '}
-        <Link to='/'> page de connexion</Link>
-      </span>
     </>
   );
 };

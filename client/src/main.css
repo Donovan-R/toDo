@@ -135,13 +135,25 @@ ul{
 /*forms*/
 
 .registerForm, .loginForm{
-  display:block;
-  text-align: center;
-  
+ display: grid;
+  place-items: center;
   background-color: #47d0ff;
   height: 100vh;
 }
+.formContainer {
+  padding: 2rem;
+  margin: 1rem;
+  width: 75%;
+  max-width: 600px;
+}
 
+.formRow {
+  display: grid;
+  padding-bottom: 0.5rem;
+}
+.formRow input {
+  height: 2rem;
+}
 
 /*To Do*/
 .formCont{
@@ -223,6 +235,8 @@ ul{
     background-repeat: no-repeat;
     margin: 0;
 }
+
+/* span */
 
 span{
     position: absolute;
