@@ -2,6 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const db = require('../db');
 const { BadRequestError, NotFoundError } = require('../errors');
 
+//* create
 const createTask = async (req, res) => {
   const { name } = req.body;
   const { userID } = req.user;
@@ -9,11 +10,13 @@ const createTask = async (req, res) => {
   const {
     rows: [task],
   } = await db.query(
-    'insert into tasks (  user_id, name) VALUES ($1, $2) RETURNING*',
+    'insert into tasks (  user_id, name) VALUES ($1, $2) RETURNING *',
     [userID, name]
   );
-  res.status(StatusCodes.CREATED).json({ tab });
+  res.status(StatusCodes.CREATED).json({ task });
 };
+
+//*getAll
 
 const getAllTasks = async (req, res) => {
   const { userID } = req.user;
@@ -25,20 +28,7 @@ const getAllTasks = async (req, res) => {
   res.status(StatusCodes.OK).json({ tasks, count: tasks.length });
 };
 
-// const getTask = async (req, res) => {
-//   const { id } = req.params;
-
-//   const {
-//     rows: [task],
-//   } = await db.query('select * from tasks where task_id = $1, {Number[id]}');
-
-//   if (!task) {
-//     throw new NotFoundError(`Pas de job avec l'id : ${id}`);
-//   }
-
-//   res.status(StatusCodes.OK).json({ task });
-// };
-
+//*update
 const updateTask = async (req, res) => {
   const { name, is_completed } = req.body;
 
@@ -61,6 +51,7 @@ const updateTask = async (req, res) => {
   res.status(StatusCodes.OK).json({ task });
 };
 
+//* delete
 const deleteTask = async (req, res) => {
   const { id: taskID } = req.params;
   const {
@@ -75,4 +66,17 @@ const deleteTask = async (req, res) => {
   res.status(StatusCodes.OK).json({ task });
 };
 
-module.exports = { createTask, getAllTasks, updateTask, deleteTask };
+//*deleteAllTasks
+const deleteAllTasks = async (req, res) => {
+  const { rows } = await db.query('DELETE FROM tasks');
+
+  res.status(StatusCodes.OK).end();
+};
+
+module.exports = {
+  createTask,
+  getAllTasks,
+  updateTask,
+  deleteTask,
+  deleteAllTasks,
+};

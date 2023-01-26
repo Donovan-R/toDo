@@ -16,7 +16,7 @@ const errorHandler = (err, req, res, next) => {
 
   // si l'email est dupliqué
   if (err.code && err.code === '23505') {
-    customError.msg = `${err.detail} Veuillez choisir une autre valeur`;
+    customError.msg = `${err.detail} identifiant déjà utilisé`;
     customError.statusCode = 400;
   }
 
