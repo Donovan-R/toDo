@@ -54,6 +54,7 @@ const Tasks = ({ alert, showAlert }) => {
         };
         setTasks([...tasks, oneTask]);
         showAlert('item ajouté', 'success', true);
+        setTaskAdded('');
       } catch (error) {
         console.log(error);
       }
@@ -128,6 +129,17 @@ const Tasks = ({ alert, showAlert }) => {
     }
   };
 
+  //*checkbox
+
+  //* barrer les tâches accomplies
+  const checkClick = (id) => {
+    const tasksChecked = tasks.map((task) =>
+      task.task_id === id ? <s>{task.name} </s> : task
+    );
+
+    setTasks(tasksChecked);
+  };
+
   return (
     <>
       <section className='toDoSection'>
@@ -140,6 +152,7 @@ const Tasks = ({ alert, showAlert }) => {
                 type='text'
                 value={taskAdded}
                 onChange={(e) => setTaskAdded(e.target.value)}
+                autoFocus
               />
               <button className='submitBtn' type='submit'>
                 {isEditing ? 'modifier' : 'ajouter'}
@@ -151,6 +164,7 @@ const Tasks = ({ alert, showAlert }) => {
             tasks={tasks}
             deleteTask={deleteTask}
             editTask={editTask}
+            checkClick={checkClick}
           />
           {tasks.length > 1 ? (
             <div className='deleteAll'>
@@ -162,9 +176,6 @@ const Tasks = ({ alert, showAlert }) => {
             ''
           )}
         </div>
-        <span>
-          <Link to='/'>changer de compte</Link>
-        </span>
       </section>
     </>
   );

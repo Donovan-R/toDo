@@ -70,6 +70,7 @@ h2,
 h3,
 h4,
 h5 {
+  text-align: center;
   margin: 0;
   margin-bottom: 1.38rem;
   font-family: var(--headingFont);
@@ -81,6 +82,8 @@ h5 {
 h1 {
   text-align: center;
   font-size: 3.052rem;
+  color: #134555;
+  margin-bottom: 3rem;
 }
 
 h2 {
@@ -141,7 +144,7 @@ ul {
   width: 75%;
   max-width: 600px;
   color: #47d0ff;
-  background-color: navy;
+  background-color: rgb(24, 24, 151);
 }
 
 .formRow {
@@ -150,6 +153,9 @@ ul {
   padding-bottom: 0.5rem;
 }
 .formRow input {
+  background: darkcyan;
+  border: none;
+  border-bottom: solid 2px #47d0ff;
   width: 75%;
   height: 2rem;
 }
@@ -203,16 +209,13 @@ ul {
 }
 
 .taskCard {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  place-items: center;
   background-color: #70dbff;
-  align-items: center;
-  justify-content: space-around;
   width: 70%;
   border-radius: 5%;
-}
-
-.taskChecked {
-  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .deleteAll {
@@ -233,11 +236,13 @@ ul {
 }
 
 .toDoSection {
-  height: 100vh;
+  /* height: 100vh; */
   inset: 0;
   background-image: url('https://images.pexels.com/photos/1226398/pexels-photo-1226398.jpeg?auto=compress&cs=tinysrgb&w=600');
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 1200px;
   margin: 0;
 }
 
@@ -245,7 +250,6 @@ ul {
 
 span {
   position: absolute;
-  right: 0;
   bottom: 0;
 }
 
@@ -256,20 +260,23 @@ span {
 }
 
 .alert-danger {
+  position: absolute;
   width: 100%;
-  background-color: var(--grey-100);
+  background-color: darkslategray;
   color: red;
 }
 
 .alert-success {
+  position: absolute;
   width: 100%;
-  background-color: var(--grey-100);
+  background-color: darkslategray;
   color: green;
 }
 
 /*Navbar*/
 nav {
-  background: teal;
+  background: hsl(180, 100%, 25%);
+  opacity: 0.8;
   box-shadow: var(--dark-shadow);
   position: sticky;
   top: 0;
@@ -293,20 +300,19 @@ nav {
   cursor: pointer;
 }
 .nav-toggle:hover {
-  color: var(--clr-primary-1);
+  color: cyan;
   transform: rotate(90deg);
 }
-.logo {
-  height: 100%;
-  border: solid 3px var(--clr-green-dark);
-}
+
 .links a {
-  color: var(--clr-green-deepDark);
+  padding-bottom: 1.5rem;
+  padding-left: 0.5rem;
+  color: black;
   font-size: 1rem;
   text-transform: capitalize;
-  letter-spacing: var(--spacing);
+  letter-spacing: 1px;
   display: block;
-  padding: 0.5rem 1rem;
+
   transition: var(--transition);
 }
 .links a:hover {
@@ -360,4 +366,14 @@ nav {
     padding: 0;
     background: var(--clr-green-dark);
   }
+}
+
+.errorPage {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-image: url('https://media.istockphoto.com/id/830670134/fr/photo/porte-de-la-voie-sans-issue.jpg?s=612x612&w=0&k=20&c=RHKbLY6jl_RQaKks9UU47JeOmFlsyiuZg0AQZ_asYgA=');
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }

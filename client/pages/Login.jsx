@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../components/Alert';
 import axios from 'axios';
+import { AiOutlineEye } from 'react-icons/ai';
 
-const Login = ({ alert, showAlert }) => {
+const Login = ({ alert, showAlert, setToken }) => {
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -24,7 +25,9 @@ const Login = ({ alert, showAlert }) => {
         'http://localhost:5000/api/v1/auth/login',
         user
       );
+
       localStorage.setItem('token', data.token);
+      setToken(data.token);
       navigate('/todo');
     } catch (error) {
       showAlert('invalide', 'danger', true);
@@ -51,12 +54,13 @@ const Login = ({ alert, showAlert }) => {
             <div className='formRow'>
               <label htmlFor='password'>mot de passe</label>
               <input
-                type='passxord'
+                type='password'
                 name='password'
                 id=''
                 value={user.password}
                 onChange={handleChange}
-              />
+              />{' '}
+              <AiOutlineEye />
             </div>
             <div className='connectBtn'>
               <button onClick={connectClick}>Se connecter</button>

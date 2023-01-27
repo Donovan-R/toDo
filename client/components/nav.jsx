@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaBars } from 'react-icons/fa';
-// import logo from '.././public/logo.jpg';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ token, setToken }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contRef = useRef(null);
   const linksRef = useRef(null);
@@ -16,32 +16,42 @@ const Navbar = () => {
     }
   }, [isOpen]);
 
+  const disconnectClick = () => {
+    localStorage.removeItem('token');
+    setToken('');
+  };
+
   return (
-    <>
-      <nav>
-        <div className='nav-center'>
-          <div className='nav-header'>
-            {/* <img className='logo' src={logo} alt='logo' /> */}
-            <button className='nav-toggle' onClick={() => setIsOpen(!isOpen)}>
-              <FaBars />
-            </button>
-          </div>
-          <div className='links-container' ref={contRef}>
-            <ul className='links' ref={linksRef}>
-              <li>
-                <a href='/'>se connecter</a>
-              </li>
-              <li>
-                <a href='/toDo'>to do App</a>
-              </li>
-              <li>
-                <a href='/'>se déconnecter</a>
-              </li>
-            </ul>
-          </div>
+    <nav>
+      <div className='nav-center'>
+        <div className='nav-header'>
+          {/* <img className='logo' src={logo} alt='logo' /> */}
+          <button className='nav-toggle' onClick={() => setIsOpen(!isOpen)}>
+            <FaBars />
+          </button>
         </div>
-      </nav>
-    </>
+        <div className='links-container' ref={contRef}>
+          <ul className='links' ref={linksRef}>
+            {token ? (
+              <>
+                <li>
+                  <Link to='/toDo'>to do App</Link>
+                </li>
+                <li>
+                  <Link to='/' onClick={disconnectClick}>
+                    se déconnecter
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to='/'>se connecter</Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

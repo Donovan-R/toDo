@@ -46,7 +46,7 @@ const register = async (req, res) => {
   );
   console.log(user);
 
-  // génère un token
+  // génère un token qui va permettre de retrouver les infos de l'user
   const token = jwt.sign(
     { userID: user.user_id, name: `${user.firstname} ${user.lastname}` },
     process.env.JWT_SECRET,

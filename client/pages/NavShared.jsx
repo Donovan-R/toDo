@@ -1,13 +1,13 @@
-import Navbar from "../components/Nav";
-import { Outlet } from "react-router-dom";
+import Navbar from '../components/Nav';
+import { Outlet } from 'react-router-dom';
 
-const SharedLayout = () => {
+const NavShared = ({ token, setToken }) => {
   return (
     <>
-      <Navbar />
+      <Navbar token={token} setToken={setToken} />
       <Outlet />
     </>
   );
 };
 
-export default SharedLayout;
+export default NavShared;

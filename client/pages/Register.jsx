@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from '../components/Alert';
 
@@ -11,6 +11,8 @@ const Register = ({ alert, showAlert }) => {
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -26,7 +28,7 @@ const Register = ({ alert, showAlert }) => {
         user
       );
       localStorage.setItem('token', data.token);
-      showAlert('connecté', 'success', true);
+      navigate('/todo');
     } catch (error) {
       showAlert(error.response.data.msg, 'danger', true);
     }
@@ -37,7 +39,7 @@ const Register = ({ alert, showAlert }) => {
       <section className='registerForm'>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <div className='register'>
-          <h2>Veuillez renseigner les champs ci-dessous</h2>
+          <h3>Veuillez renseigner les champs ci-dessous</h3>
           <form onSubmit={handleSubmit} className='formContainer'>
             <div className='formRow'>
               <label htmlFor='lastname'>Nom</label>
@@ -96,7 +98,7 @@ const Register = ({ alert, showAlert }) => {
         </div>
         <span>
           {' '}
-          <Link to='/'> page de connexion</Link>
+          déjà inscrit ? <Link to='/'> page de connexion</Link>
         </span>
       </section>
     </>

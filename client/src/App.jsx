@@ -5,9 +5,15 @@ import Error from '../pages/Error';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NavShared from '../pages/NavShared';
+import ProtectedRoute from '../pages/ProtectedRoute';
+
+const getToken = () => {
+  localStorage.getItem('token') ? localStorage.getItem('token') : '';
+};
 
 const App = () => {
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
+  const [token, setToken] = useState(getToken);
 
   const showAlert = (msg = '', type = '', show = false) => {
     setAlert({
@@ -20,18 +26,33 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<NavShared />}>
+        <Route
+          path='/'
+          element={<NavShared token={token} setToken={setToken} />}
+        >
           <Route
             index
-            element={<Login alert={alert} showAlert={showAlert} />}
+            element={
+              <Login alert={alert} showAlert={showAlert} setToken={setToken} />
+            }
           />
           <Route
             path='/register'
-            element={<Register alert={alert} showAlert={showAlert} />}
+            element={
+              <Register
+                alert={alert}
+                showAlert={showAlert}
+                setToken={setToken}
+              />
+            }
           />
           <Route
             path='/todo'
-            element={<Tasks alert={alert} showAlert={showAlert} />}
+            element={
+              <ProtectedRoute token={token}>
+                <Tasks alert={alert} showAlert={showAlert} token={token} />
+              </ProtectedRoute>
+            }
           />
           <Route path='*' element={<Error />} />
         </Route>
