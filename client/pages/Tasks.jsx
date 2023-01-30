@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TasksList from '../components/TasksList';
 import { Link } from 'react-router-dom';
 import Alert from '../components/Alert';
@@ -8,10 +8,18 @@ import { FaExclamationTriangle } from 'react-icons/fa';
 const Tasks = ({ alert, showAlert }) => {
   const [tasks, setTasks] = useState([]);
   const [taskAdded, setTaskAdded] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
   const token = localStorage.getItem('token');
   const url = 'http://localhost:5000/api/v1/tasks/';
+  const inputRef = useRef(null);
+
+  //* focus
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [isEditing, taskAdded]);
 
   //* allTasks
 
@@ -58,6 +66,8 @@ const Tasks = ({ alert, showAlert }) => {
       } catch (error) {
         console.log(error);
       }
+      setIsEditing(false);
+      setTaskAdded('');
     }
 
     //* édition tâche
@@ -111,6 +121,8 @@ const Tasks = ({ alert, showAlert }) => {
     } catch (error) {
       console.log(error);
     }
+    setIsEditing(false);
+    setTaskAdded('');
   };
 
   //* supprimer toutes les tâches
@@ -127,24 +139,43 @@ const Tasks = ({ alert, showAlert }) => {
     } catch (error) {
       console.log(error);
     }
+    setIsEditing(false);
+    setTaskAdded('');
   };
 
   //*checkbox
 
   //* barrer les tâches accomplies
-  const checkClick = (id) => {
+  const checkTask = async (id) => {
     const tasksChecked = tasks.map((task) =>
-      task.task_id === id ? <s>{task.name} </s> : task
+      task.task_id === id ? { ...task, is_completed: !task.is_completed } : task
     );
 
-    setTasks(tasksChecked);
+    try {
+      await axios.put(
+        `${url}task-checked/${id}`,
+        {},
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTasks(tasksChecked);
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
+    setIsEditing(false);
+    setTaskAdded('');
   };
 
   return (
     <>
       <section className='toDoSection'>
         <h1>to do or not to do</h1>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        <div className='alertSection'>
+          {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+        </div>
         <div className='formCont'>
           <div className='inputToDo'>
             <form action='' onSubmit={handleSubmit}>
@@ -152,7 +183,8 @@ const Tasks = ({ alert, showAlert }) => {
                 type='text'
                 value={taskAdded}
                 onChange={(e) => setTaskAdded(e.target.value)}
-                autoFocus
+                placeholder='saisissez une tâche'
+                ref={inputRef}
               />
               <button className='submitBtn' type='submit'>
                 {isEditing ? 'modifier' : 'ajouter'}
@@ -164,7 +196,8 @@ const Tasks = ({ alert, showAlert }) => {
             tasks={tasks}
             deleteTask={deleteTask}
             editTask={editTask}
-            checkClick={checkClick}
+            checkTask={checkTask}
+            isCompleted={isCompleted}
           />
           {tasks.length > 1 ? (
             <div className='deleteAll'>

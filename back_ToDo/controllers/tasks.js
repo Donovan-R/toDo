@@ -51,6 +51,25 @@ const updateTask = async (req, res) => {
   res.status(StatusCodes.OK).json({ task });
 };
 
+//* update check_task
+
+const checkTask = async (req, res) => {
+  const { id: taskID } = req.params;
+
+  const {
+    rows: [task],
+  } = await db.query(
+    'UPDATE tasks SET is_completed = NOT is_completed WHERE task_id = $1 RETURNING *',
+    [taskID]
+  );
+
+  if (!task) {
+    throw new NotFoundError(`Pas de tâche avec l'id : ${taskID}`);
+  }
+
+  res.status(StatusCodes.OK).json({ task });
+};
+
 //* delete
 const deleteTask = async (req, res) => {
   const { id: taskID } = req.params;
@@ -79,4 +98,5 @@ module.exports = {
   updateTask,
   deleteTask,
   deleteAllTasks,
+  checkTask,
 };

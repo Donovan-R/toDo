@@ -3,8 +3,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import Alert from '../components/Alert';
 import axios from 'axios';
 import { AiOutlineEye } from 'react-icons/ai';
+import { GoEyeClosed } from 'react-icons/go';
 
 const Login = ({ alert, showAlert, setToken }) => {
+  const [passwordType, setPasswordType] = useState('password');
+
+  const changePasswordType = (e) => {
+    e.preventDefault();
+    if (passwordType === 'password') {
+      setPasswordType('text');
+    } else {
+      setPasswordType('password');
+    }
+    return;
+  };
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -27,6 +40,7 @@ const Login = ({ alert, showAlert, setToken }) => {
       );
 
       localStorage.setItem('token', data.token);
+      localStorage.setItem('user', user.email);
       setToken(data.token);
       navigate('/todo');
     } catch (error) {
@@ -39,6 +53,7 @@ const Login = ({ alert, showAlert, setToken }) => {
     <>
       <section className='loginForm'>
         {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+
         <div className='login'>
           <h2>veuillez vous identifier</h2>
           <form action='' className='formContainer'>
@@ -54,13 +69,22 @@ const Login = ({ alert, showAlert, setToken }) => {
             <div className='formRow'>
               <label htmlFor='password'>mot de passe</label>
               <input
-                type='password'
+                type={passwordType}
                 name='password'
                 id=''
                 value={user.password}
                 onChange={handleChange}
-              />{' '}
-              <AiOutlineEye />
+              />
+              <span
+                className='showPassword'
+                onClick={(e) => changePasswordType(e)}
+              >
+                {passwordType === 'password' ? (
+                  <AiOutlineEye />
+                ) : (
+                  <GoEyeClosed />
+                )}
+              </span>
             </div>
             <div className='connectBtn'>
               <button onClick={connectClick}>Se connecter</button>

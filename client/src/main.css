@@ -80,10 +80,10 @@ h5 {
 }
 
 h1 {
+  padding-top: 7rem;
   text-align: center;
   font-size: 3.052rem;
-  color: #134555;
-  margin-bottom: 3rem;
+  color: teal;
 }
 
 h2 {
@@ -136,6 +136,7 @@ ul {
 
 .login,
 .register {
+  padding-top: 6rem;
   display: grid;
   place-items: center;
 }
@@ -144,7 +145,9 @@ ul {
   width: 75%;
   max-width: 600px;
   color: #47d0ff;
-  background-color: rgb(24, 24, 151);
+  background-color: rgba(19, 19, 94);
+  border: solid 2px black;
+  border-radius: 5%;
 }
 
 .formRow {
@@ -169,14 +172,21 @@ ul {
   color: black;
 }
 
+.showPassword {
+  border: none;
+  background-color: transparent;
+  font-size: 1.5rem;
+  color: #47d0ff;
+}
+
 /*To Do*/
 .formCont {
   display: grid;
   text-align: center;
-  background-color: rgb(70, 45, 45);
+  background-color: rgba(47, 87, 112, 0.8);
   width: 60%;
   margin: auto;
-  border: solid 2px rgb(52, 229, 242);
+  border: solid 2px rgb(44, 182, 192);
   border-radius: 5%;
 }
 
@@ -190,8 +200,9 @@ ul {
   margin-left: 0.5rem;
   background-color: #222;
   color: #47d0ff;
-  border: solid 1px teal;
-  border-radius: 5%;
+  border: solid 2px teal;
+  border-radius: 30%;
+  font-size: 1.5rem;
 }
 
 .inputToDo button:hover {
@@ -209,12 +220,13 @@ ul {
 }
 
 .taskCard {
+  font-size: 1.2rem;
   display: grid;
   grid-template-columns: 1fr 4fr 2fr;
   place-items: center;
   background-color: #70dbff;
   width: 70%;
-  border-radius: 5%;
+  border-radius: 50px 101px 50px 101px;
   margin-bottom: 0.5rem;
 }
 
@@ -246,30 +258,70 @@ ul {
   margin: 0;
 }
 
+.editBtn,
+.deleteBtn {
+  font-size: 1rem;
+  border: solid 1px black;
+  border-radius: 10%;
+}
+
+.editBtn {
+  background-color: #0f5132;
+  margin-left: 0.5rem;
+}
+.editBtn:hover {
+  background-color: greenyellow;
+}
+
+.deleteBtn {
+  background-color: rgb(193, 58, 58);
+}
+.deleteBtn:hover {
+  background-color: red;
+}
+
+.checkBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.checkedStripe {
+  color: darkgreen;
+}
+
 /* span */
 
-span {
-  position: absolute;
-  bottom: 0;
-}
+/* span {
+ 
+} */
 
 /*Alert*/
 
+.alertSection {
+  height: 4.5rem;
+  text-align: center;
+  width: 100%;
+}
+
 .alert {
   text-align: center;
+  width: 100%;
+}
+
+.alert-danger,
+.alert-success,
+.alert-modified {
+  position: absolute;
+  width: 100%;
+  background-color: rgba(223, 210, 210, 0.5);
 }
 
 .alert-danger {
-  position: absolute;
-  width: 100%;
-  background-color: darkslategray;
   color: red;
 }
 
 .alert-success {
-  position: absolute;
-  width: 100%;
-  background-color: darkslategray;
   color: green;
 }
 
@@ -278,7 +330,7 @@ nav {
   background: hsl(180, 100%, 25%);
   opacity: 0.8;
   box-shadow: var(--dark-shadow);
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   margin: auto;
@@ -316,7 +368,7 @@ nav {
   transition: var(--transition);
 }
 .links a:hover {
-  background: transparent;
+  background: rgba(127, 179, 199, 0.5);
   color: cyan;
   padding-left: 1.5rem;
 }
@@ -364,16 +416,24 @@ nav {
   }
   .links a:hover {
     padding: 0;
-    background: var(--clr-green-dark);
+    background: rgba(127, 179, 199, 0.5);
   }
 }
+
+/* Page d'erreur */
 
 .errorPage {
   display: grid;
   place-items: center;
+
   height: 100vh;
-  background-image: url('https://media.istockphoto.com/id/830670134/fr/photo/porte-de-la-voie-sans-issue.jpg?s=612x612&w=0&k=20&c=RHKbLY6jl_RQaKks9UU47JeOmFlsyiuZg0AQZ_asYgA=');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://media.istockphoto.com/id/830670134/fr/photo/porte-de-la-voie-sans-issue.jpg?s=612x612&w=0&k=20&c=RHKbLY6jl_RQaKks9UU47JeOmFlsyiuZg0AQZ_asYgA=');
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
+}
+
+.errorPage h1 {
+  color: white;
 }

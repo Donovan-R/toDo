@@ -37,9 +37,11 @@ const Register = ({ alert, showAlert }) => {
   return (
     <>
       <section className='registerForm'>
-        {alert.show && <Alert {...alert} removeAlert={showAlert} />}
         <div className='register'>
+          {alert.show && <Alert {...alert} removeAlert={showAlert} />}
+
           <h3>Veuillez renseigner les champs ci-dessous</h3>
+
           <form onSubmit={handleSubmit} className='formContainer'>
             <div className='formRow'>
               <label htmlFor='lastname'>Nom</label>

@@ -4,7 +4,7 @@ const Alert = ({ msg, type, removeAlert }) => {
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       removeAlert();
-    }, 3000);
+    }, 1500);
     return () => clearTimeout(timeOutId);
   }, [removeAlert]);
 

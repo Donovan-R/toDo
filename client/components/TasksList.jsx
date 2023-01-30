@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { MdColorLens, MdOutlineDeleteForever } from 'react-icons/md';
+import { GrCheckbox, GrCheckboxSelected, GrTrash } from 'react-icons/gr';
 
-const TasksList = ({ tasks, deleteTask, editTask, checkClick }) => {
+const TasksList = ({ tasks, deleteTask, editTask, checkTask }) => {
   return (
     <div className='tasksList'>
       {tasks.map((task, index) => {
-        const { task_id: id, name } = task;
+        const { task_id: id, name, is_completed } = task;
         return (
           <div className='taskCard' key={index} id={id}>
-            <input type='checkbox' onClick={() => console.log('hi')} />
+            <button onClick={() => checkTask(id)} className='checkBtn'>
+              {is_completed ? <GrCheckboxSelected /> : <GrCheckbox />}
+            </button>
             <div className='taskChecked'>
-              <p>{name}</p>
+              {is_completed ? (
+                <p>
+                  <s className='checkedStripe'>{name}</s>
+                </p>
+              ) : (
+                <p>{name}</p>
+              )}
             </div>
             <div className='taskBtns'>
-              <button onClick={() => deleteTask(id)}>
-                <MdOutlineDeleteForever />
+              <button onClick={() => deleteTask(id)} className='deleteBtn'>
+                <GrTrash />
               </button>
-              <button className='editBtn' onClick={() => editTask(id)}>
+              <button onClick={() => editTask(id)} className='editBtn'>
                 <FaEdit />
               </button>
             </div>

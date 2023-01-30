@@ -8,12 +8,12 @@ import NavShared from '../pages/NavShared';
 import ProtectedRoute from '../pages/ProtectedRoute';
 
 const getToken = () => {
-  localStorage.getItem('token') ? localStorage.getItem('token') : '';
+  return localStorage.getItem('token') ? localStorage.getItem('token') : '';
 };
 
 const App = () => {
   const [alert, setAlert] = useState({ msg: '', type: '', show: false });
-  const [token, setToken] = useState(getToken);
+  const [token, setToken] = useState(getToken());
 
   const showAlert = (msg = '', type = '', show = false) => {
     setAlert({

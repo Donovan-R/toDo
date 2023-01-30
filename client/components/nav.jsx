@@ -6,6 +6,7 @@ const Navbar = ({ token, setToken }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contRef = useRef(null);
   const linksRef = useRef(null);
+  const userName = localStorage.getItem('user');
 
   useEffect(() => {
     const linksHeight = linksRef.current.getBoundingClientRect().height;
@@ -18,6 +19,7 @@ const Navbar = ({ token, setToken }) => {
 
   const disconnectClick = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setToken('');
   };
 
@@ -25,7 +27,7 @@ const Navbar = ({ token, setToken }) => {
     <nav>
       <div className='nav-center'>
         <div className='nav-header'>
-          {/* <img className='logo' src={logo} alt='logo' /> */}
+          <span>{userName}</span>
           <button className='nav-toggle' onClick={() => setIsOpen(!isOpen)}>
             <FaBars />
           </button>

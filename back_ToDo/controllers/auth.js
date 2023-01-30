@@ -44,7 +44,6 @@ const register = async (req, res) => {
     'INSERT INTO users (firstname, lastname, mobile, email, password) VALUES ($1, $2, $3, $4, $5) RETURNING *',
     [firstname, lastname, mobile, email, hashedPassword]
   );
-  console.log(user);
 
   // génère un token qui va permettre de retrouver les infos de l'user
   const token = jwt.sign(
